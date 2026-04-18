@@ -27,6 +27,11 @@ body {
   min-height: 100%;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #22d3ee #0b1728;
+}
+
 body {
   margin: 0;
   color: var(--foreground);
@@ -40,12 +45,75 @@ body {
   overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #091223, #0d1c31 45%, #0a1628 100%);
+  border-left: 1px solid rgb(34 211 238 / 0.2);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22d3ee 0%, #14b8a6 55%, #38bdf8 100%);
+  border-radius: 999px;
+  border: 2px solid #0b1728;
+  box-shadow: inset 0 0 8px rgb(255 255 255 / 0.28);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #67e8f9 0%, #2dd4bf 55%, #7dd3fc 100%);
+}
+
+.loadout-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(251 146 60 / 0.9) rgb(2 6 23 / 0.45);
+}
+
+.loadout-scroll::-webkit-scrollbar {
+  width: 11px;
+}
+
+.loadout-scroll::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgb(15 23 42 / 0.7), rgb(2 6 23 / 0.82));
+  border-radius: 999px;
+  border: 1px solid rgb(148 163 184 / 0.26);
+}
+
+.loadout-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgb(251 146 60 / 0.98), rgb(56 189 248 / 0.98));
+  border-radius: 999px;
+  border: 2px solid rgb(15 23 42 / 0.88);
+  box-shadow: inset 0 0 10px rgb(255 255 255 / 0.33), 0 0 8px rgb(56 189 248 / 0.35);
+}
+
+.loadout-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgb(253 186 116), rgb(125 211 252));
+}
+
+.loadout-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 .emoji-icon {
-  width: 70%;
-  height: 70%;
+  width: 84%;
+  height: 84%;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgb(15 23 42 / 0.22));
   will-change: transform;
+}
+
+.game-cell {
+  padding: 2px;
+}
+
+.cell-emoji {
+  width: 74%;
+  height: 74%;
+  max-width: calc(100% - 3px);
+  max-height: calc(100% - 3px);
 }
 
 .grid-sheen {
@@ -135,6 +203,56 @@ body {
   }
 }
 
+@keyframes playerChomp {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  35% {
+    transform: scale(1.25) rotate(-10deg);
+  }
+
+  60% {
+    transform: scale(1.12) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes eatenTarget {
+  0% {
+    opacity: 0.95;
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1.1);
+  }
+
+  70% {
+    opacity: 0.5;
+    transform: scale(0.42) rotate(24deg);
+    filter: brightness(1.5);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(36deg);
+    filter: brightness(1.8);
+  }
+}
+
+@keyframes eatWave {
+  0% {
+    opacity: 0.85;
+    transform: scale(0.3);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
 @keyframes scorePulse {
   0% {
     transform: scale(1);
@@ -208,6 +326,18 @@ body {
   animation: captureRing 340ms ease-out;
 }
 
+.animate-player-chomp {
+  animation: playerChomp 300ms ease-out;
+}
+
+.animate-eaten-target {
+  animation: eatenTarget 340ms ease-out forwards;
+}
+
+.animate-eat-wave {
+  animation: eatWave 340ms ease-out forwards;
+}
+
 .animate-score-pulse {
   animation: scorePulse 440ms ease-out;
 }
@@ -222,8 +352,13 @@ body {
 
 @media (max-width: 640px) {
   .emoji-icon {
-    width: 74%;
-    height: 74%;
+    width: 88%;
+    height: 88%;
+  }
+
+  .cell-emoji {
+    width: 78%;
+    height: 78%;
   }
 }
 
