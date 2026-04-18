@@ -19,7 +19,7 @@ const GRID_SIZE = 20;
 const LEVEL_UP_SCORE = 50;
 const POINTS_PER_TARGET = 10;
 const OBSTACLES_PER_LEVEL = 3;
-const TWEMOJI_BASE = "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg";
+const TWEMOJI_BASE = "/emojis";
 const SWIPE_THRESHOLD = 28;
 
 function getCellKey(x, y) {
