@@ -1,26 +1,239 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff7ed;
+  --foreground: #172036;
+}
+
+.dark {
+  --background: #081224;
+  --foreground: #edf6ff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans-display);
+  --font-mono: var(--font-mono-code);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
+  margin: 0;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, #fb923c 16%, transparent), transparent 28%),
+    radial-gradient(circle at 85% 22%, color-mix(in srgb, #22d3ee 12%, transparent), transparent 30%),
+    radial-gradient(circle at 40% 88%, color-mix(in srgb, #34d399 11%, transparent), transparent 33%),
+    var(--background);
+  transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
+}
+
+.emoji-icon {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgb(15 23 42 / 0.22));
+  will-change: transform;
+}
+
+.grid-sheen {
+  background: linear-gradient(120deg, transparent 20%, rgb(255 255 255 / 0.22) 50%, transparent 78%);
+  animation: gridSheen 6.5s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes floatDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -20px, 0) scale(1.06);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes boardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.986);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes targetHop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  35% {
+    transform: translateY(-6%) scale(1.05);
+  }
+
+  60% {
+    transform: translateY(1%) scale(0.98);
+  }
+}
+
+@keyframes obstacleSway {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(-7deg) scale(1.04);
+  }
+}
+
+@keyframes playerPop {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  55% {
+    transform: scale(1.22);
+    filter: brightness(1.22);
+  }
+
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes captureRing {
+  from {
+    opacity: 0.8;
+    transform: scale(0.4);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@keyframes scorePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(56 189 248 / 0.24);
+  }
+
+  60% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 14px rgb(56 189 248 / 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgb(56 189 248 / 0);
+  }
+}
+
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gridSheen {
+  from {
+    transform: translateX(-130%);
+  }
+
+  to {
+    transform: translateX(130%);
+  }
+}
+
+.animate-float-1 {
+  animation: floatDrift 8.5s ease-in-out infinite;
+}
+
+.animate-float-2 {
+  animation: floatDrift 10.5s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.animate-float-3 {
+  animation: floatDrift 12.5s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+.animate-board-reveal {
+  animation: boardReveal 420ms ease-out;
+}
+
+.animate-target-hop {
+  animation: targetHop 1150ms ease-in-out infinite;
+}
+
+.animate-obstacle-sway {
+  animation: obstacleSway 2.7s ease-in-out infinite;
+}
+
+.animate-player-pop {
+  animation: playerPop 240ms ease-out;
+}
+
+.animate-capture-ring {
+  animation: captureRing 340ms ease-out;
+}
+
+.animate-score-pulse {
+  animation: scorePulse 440ms ease-out;
+}
+
+.animate-overlay-fade {
+  animation: overlayFade 260ms ease-out;
+}
+
+.dpad-button:active {
+  transform: translateY(1px) scale(0.94);
+}
+
+@media (max-width: 640px) {
+  .emoji-icon {
+    width: 74%;
+    height: 74%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
