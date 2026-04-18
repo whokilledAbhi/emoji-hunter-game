@@ -116,6 +116,11 @@ body::-webkit-scrollbar-thumb:hover {
   max-height: calc(100% - 3px);
 }
 
+.hero-emoji {
+  width: 86%;
+  height: 86%;
+}
+
 .grid-sheen {
   background: linear-gradient(120deg, transparent 20%, rgb(255 255 255 / 0.22) 50%, transparent 78%);
   animation: gridSheen 6.5s linear infinite;
@@ -359,6 +364,11 @@ body::-webkit-scrollbar-thumb:hover {
   .cell-emoji {
     width: 78%;
     height: 78%;
+  }
+
+  .hero-emoji {
+    width: 90%;
+    height: 90%;
   }
 }
 

@@ -619,7 +619,7 @@ export default function GameGrid() {
           <div className="pointer-events-none absolute inset-0 grid-sheen" />
 
           <div
-            className="relative z-20 grid border-l border-t border-cyan-300/55 shadow-[inset_0_0_20px_rgba(34,211,238,0.16)]"
+            className="relative z-20 grid shadow-[inset_0_0_20px_rgba(34,211,238,0.16)]"
             style={{
               gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`,
               width: "min(92vw, 680px)",
@@ -648,7 +648,7 @@ export default function GameGrid() {
               return (
                 <div
                   key={index}
-                  className="game-cell relative flex items-center justify-center overflow-hidden border-r border-b border-cyan-300/55"
+                  className="game-cell relative flex items-center justify-center overflow-hidden"
                 >
                   {isCaptureCell && (
                     <div
@@ -672,7 +672,7 @@ export default function GameGrid() {
                       <EmojiIcon
                         symbol={heroEmoji}
                         label="Player"
-                        className={`cell-emoji ${playerAnimationClass}`.trim()}
+                        className={`cell-emoji hero-emoji ${playerAnimationClass}`.trim()}
                       />
                     </>
                   )}
